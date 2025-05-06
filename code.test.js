@@ -10,7 +10,7 @@ const testSort =
     var a2 = JSON.parse(JSON.stringify(arr)); 
     //modified to run parallel function 
     return mergesort(a1).then(() => {
-      return JSON.stringify(a1) === JSON(stringify(a2.sort(function(a, b) { return a - b; }))); 
+      return JSON.stringify(a1) === JSON.stringify(a2.sort(function(a, b) { return a - b; })); 
     }); 
   }); 
 
