@@ -1,28 +1,34 @@
-//mergesort code taken from the lecture slides
-function merge(x, lo, mid, hi, tmp) {
-  let a = lo, b = mid + 1; 
-  for (let k = lo; k <= hi; k++) {
-    if (a <= mid && (b > hi || x[a] < x[b])) {
+//based off mergesort code from sorting lecture slides 
+
+//merge remains the same 
+function merge(x, low, mid, high, tmp) {
+  let a = low, b = mid + 1; 
+  for (let k = lo; k <= high; k++) {
+    if (a <= mid && (b > high || x[a] < x[b])) {
       tmp[k] = x[a++]; 
     } else {
       tmp[k] = x[b++]; 
     }
   }
-  for (let k = lo; k <= hi; k++) {
+  for (let k = low; k <= high; k++) {
     x[k] = tmp[k]; 
   }
 }
 
-function msort(x, lo, hi, tmp) {
-  if (lo >= hi) return; 
-  let mid = Math.floor((lo + hi) / 2); 
-  msort(x, lo, mid, tmp); 
-  msort(x, mid + 1, hi, tmp); 
-  merge(x, lo, mid, hi, tmp); 
+async function parallelMSort(x, low, high, tmp) {
+  if (low >= high) return; 
+  let mid = Math.floor((low + high) / 2); 
+  //run both halves of the sort in parallel
+  //instead of waiting for recursion 
+  await Promise.all([
+    parallelMSort(x, low, mid, tmp),
+    parallelMSort(x, mid + 1, high, tmp)
+  ])
+  merge(x, low, mid, high, tmp); 
 }
 
-function mergesort(x) {
+async function mergesort(x) {
   let tmp = []; 
-  msort(x, 0, x.length - 1, tmp); 
+  //run async function parallelMSort
+  await parallelMSort(x, 0, x.length - 1, tmp); 
 }
-

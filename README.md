@@ -12,3 +12,10 @@ the function and run automatically when you commit through a GitHub action.
 
 What is the span of the parallel program, in terms of worst-case $\Theta$? Hint:
 It may help to consider the DAG of the parallel program.
+
+
+## Sources and Plagiarism 
+
+- code.js and code.test.js based off mergesort example in sorting lecture slides
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all

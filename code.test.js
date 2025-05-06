@@ -7,8 +7,11 @@ eval(fs.readFileSync('code.js')+'');
 const testSort = 
   jsc.forall("array nat", function(arr) {
     var a1 = JSON.parse(JSON.stringify(arr)); 
-    var a1 = JSON.parse(JSON.stringify(arr)); 
-    return JSON.stringify(mergesort(a1)) == JSON.stringify(a1.sort(function(a, b) { return a - b; })); 
+    var a2 = JSON.parse(JSON.stringify(arr)); 
+    //modified to run parallel function 
+    return mergesort(a1).then(() => {
+      return JSON.stringify(a1) === JSON(stringify(a2.sort(function(a, b) { return a - b; }))); 
+    }); 
   }); 
 
 jsc.assert(testSort); 
