@@ -3,7 +3,7 @@
 //merge remains the same 
 function merge(x, low, mid, high, tmp) {
   let a = low, b = mid + 1; 
-  for (let k = lo; k <= high; k++) {
+  for (let k = low; k <= high; k++) {
     if (a <= mid && (b > high || x[a] < x[b])) {
       tmp[k] = x[a++]; 
     } else {
