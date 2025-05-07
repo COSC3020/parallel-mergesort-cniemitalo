@@ -18,8 +18,8 @@ function merge(x, low, mid, high, tmp) {
 async function parallelMSort(x, low, high, tmp) {
   if (low >= high) return; 
   let mid = Math.floor((low + high) / 2); 
-  //run both halves of the sort in parallel
-  //instead of waiting for recursion 
+  //run both halves of the sort asynchronously
+  //run concurrently, instead of waiting for recursion 
   await Promise.all([
     parallelMSort(x, low, mid, tmp),
     parallelMSort(x, mid + 1, high, tmp)
